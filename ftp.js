@@ -8,20 +8,16 @@ const upload = async (credentials, pathToLocalFile, pathToRemoteFile) => new Pro
     };
     var c = new Client();
 
-    c.on('ready', function() {
-        c.mkdir(pathToRemoteFile, true, function(err) {
-            if (err) throw err;
-            else {
-                c.put(pathToLocalFile, pathToRemoteFile, function(err) {
-                    if (err) {
-                        return reject(err);
-                    }
-                    c.end();
-                    return resolve;
-                });
+    c.on('ready', () => {
+        c.put(pathToLocalFile, pathToRemoteFile, function(err) {
+            if (err) {
+                return reject(err);
             }
+            c.end();
+            return resolve;
         });
     });
+
     c.on('error', function(err) {
         console.log(err);
     });
