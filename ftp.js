@@ -1,4 +1,4 @@
-function upload(credentials, pathToLocalFile, pathToRemoteFile, callback) {
+const upload = async (credentials, pathToLocalFile, pathToRemoteFile) => new Promise((resolve, reject) => {
     var Client = require('ftp');
     var options = {
         host: credentials.host,
@@ -14,10 +14,10 @@ function upload(credentials, pathToLocalFile, pathToRemoteFile, callback) {
             else {
                 c.put(pathToLocalFile, pathToRemoteFile, function(err) {
                     if (err) {
-                        throw err;
+                        return reject(err);
                     }
-                    if (callback !== void 0) callback();
                     c.end();
+                    return resolve;
                 });
             }
         });
@@ -26,4 +26,4 @@ function upload(credentials, pathToLocalFile, pathToRemoteFile, callback) {
         console.log(err);
     });
     c.connect(options);
-}
+});
