@@ -7,18 +7,16 @@ const upload = async (credentials, pathToLocalFile, pathToRemoteFile) => new Pro
         password: credentials.password
     };
     var c = new Client();
-
+    //on client ready, upload the file.
     c.on('ready', () => {
         c.put(pathToLocalFile, pathToRemoteFile, function(err) {
-            if (err) {
-                return reject(err);
-            }
-            c.end();
-            return resolve;
+            c.end(); //end client
+            if (err) return reject(err); //reject promise
+            return resolve; //fullfill promise
         });
     });
-
-    c.on('error', function(err) {
+    //general error
+    c.on('error', (err) => {
         console.log(err);
     });
     c.connect(options);
