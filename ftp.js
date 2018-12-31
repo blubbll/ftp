@@ -3,7 +3,7 @@ const upload = async (credentials, pathToLocalFile, pathToRemoteFile) => new Pro
     var options = {
         host: credentials.host,
         port: credentials.port,
-        username: credentials.username,
+        user: credentials.user,
         password: credentials.password
     };
     var c = new Client();
