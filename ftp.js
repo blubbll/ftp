@@ -1,4 +1,4 @@
-function upload(credentials,pathToRemoteFile,pathToLocalFile){
+function upload(credentials,pathToRemoteFile,pathToLocalFile, callback){
   var Client = require('ftp');
   var options = {
       host: credentials.host,
@@ -14,7 +14,7 @@ function upload(credentials,pathToRemoteFile,pathToLocalFile){
     else{
       c.put(localDirectory+localFile,remoteDirectory+remoteFile, function(err) {
         if (err){throw err;}
-        console.log('uploaded file to:'+pathToRemoteFile);
+         if(callback!==void 0) callback();
         c.end();
       });
     }
