@@ -29,4 +29,6 @@ Now go and tell your boss that you are awesome!
 
 ##TODO
 add other functions
-add async?
+add async? - done
+
+updated to latest ftp.js
